@@ -1,0 +1,27 @@
+User Login
+---
+tags:
+  - Authentication
+parameters:
+  - name: body
+    description: The body should contain the user Registration data
+    in: body
+    required: true
+    schema:
+      type: object
+      required:
+        - "phone"
+        - "password"
+      properties:
+        phone:
+          type: "string"
+          example: "89674781443"
+        password:
+          type: "string"
+          example: "1234"
+responses:
+  201:
+    description: When a user successfully logs in, response token data
+
+  401:
+    description: login data is not correct

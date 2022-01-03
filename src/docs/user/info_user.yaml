@@ -1,0 +1,13 @@
+User Data Info
+---
+tags:
+  - User
+
+parameters:
+  - in: header
+    name: Authorization
+    required: true
+    
+responses:
+  200:
+    description: Determination of the verification status was successful
