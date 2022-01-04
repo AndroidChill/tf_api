@@ -54,3 +54,13 @@ def updated_tire(tire):
             }
         ), HTTP_200_OK
     )
+
+
+def created_employee(employee):
+    return jsonify(
+        handle_response(
+            {
+                "employee": employee.serialize()
+            }
+        ), HTTP_201_CREATED
+    )

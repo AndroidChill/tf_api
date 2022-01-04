@@ -16,7 +16,20 @@ class User(db.Model):
     updated_at = db.Column(db.DateTime, onupdate=datetime.now())
 
     def __repr__(self) -> str:
-        return 'User>>> {self.phone}'
+        return str(self.serialize())
+
+    def serialize(self):
+        return {
+            "first_name": self.first_name,
+            "second_name": self.second_name,
+            "third_name": self.third_name,
+            "phone": self.phone,
+            "email": self.email,
+            "password": self.password,
+            "city": self.city,
+            "created_at": self.created_at,
+            "updated_at": self.updated_at,
+        }
 
 class Car(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -30,8 +43,8 @@ class Car(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.now())
     updated_at = db.Column(db.DateTime, onupdate=datetime.now())
 
-    def __repr__(self) -> str:
-        return 'Car>>> {self.number}'
+    def __repr__(self):
+        return str(self.serialize())
 
     def serialize(self):
         return {
@@ -53,8 +66,8 @@ class CarDisk(db.Model):
     lifetime = db.Column(db.String(80))
     car_id = db.Column(db.Integer, db.ForeignKey('car.id'))
 
-    def __repr__(self) -> str:
-        return "CarDisk>>> {self.radius}"
+    def __repr__(self):
+        return str(self.serialize())
 
     def serialize(self):
         return {
@@ -62,4 +75,23 @@ class CarDisk(db.Model):
             "radius": self.radius,
             "lifetime": self.lifetime,
             "car_id": self.car_id
+        }
+
+
+class Employee(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(80))
+    second_name = db.Column(db.String(80))
+    third_name = db.Column(db.String(80))
+    rate = db.Column(db.Float, default = 0.0)
+
+    def __repr__(self) -> str:
+        return str(self.serialize())
+
+    def serialize(self):
+        return {
+            "first_name": self.first_name,
+            "second_name": self.second_name,
+            "third_name": self.third_name,
+            "rate": self.rate
         }

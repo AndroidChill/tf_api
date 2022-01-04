@@ -1,0 +1,31 @@
+Employee Create
+---
+tags:
+  - Employee
+parameters:
+  - name: body
+    description: The body should contain the user Registration data
+    in: body
+    required: true
+    schema:
+      type: object
+      required:
+        - "first_name"
+        - "second_name"
+        - "third_name"
+      properties:
+        first_name:
+          type: "string"
+          example: "Vasi"
+        second_name:
+          type: "string"
+          example: "Petr"
+        third_name:
+          type: "string"
+          example: "Ivan"
+responses:
+  201:
+    description: When a user successfully logs in, response token data
+
+  401:
+    description: login data is not correct

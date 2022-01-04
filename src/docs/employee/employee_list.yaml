@@ -1,0 +1,11 @@
+Employee list
+---
+tags:
+  - Employee
+
+responses:
+  201:
+    description: When a user successfully logs in, response token data
+
+  401:
+    description: login data is not correct

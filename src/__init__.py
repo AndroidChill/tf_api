@@ -3,6 +3,7 @@ import os
 from src.auth import auth
 from src.car import car
 from src.tire import tire
+from src.employee import employee
 from src.database import db
 from datetime import timedelta
 from flask_jwt_extended import JWTManager
@@ -40,6 +41,7 @@ def create_app(test_config=None):
     app.register_blueprint(auth)
     app.register_blueprint(car)
     app.register_blueprint(tire)
+    app.register_blueprint(employee)
 
     Swagger(app, config=swagger_config, template=template)
 

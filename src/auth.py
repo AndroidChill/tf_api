@@ -2,10 +2,11 @@ from flask import Blueprint, jsonify, request
 from src.constants.http_status_codes import HTTP_200_OK, HTTP_201_CREATED, HTTP_400_BAD_REQUEST, HTTP_401_UNAUTHORIZED, HTTP_409_CONFLICT, handle_response
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_jwt_extended import jwt_required, create_access_token, create_refresh_token, get_jwt_identity
-from src.database import User, db
+from src.database import User, db, Car, CarDisk
 from src.constants.success_messages import token_data, info_user
 from src.constants.error_messages import unauthorization_error, user_phone_already_exist, input_incorrect_phone
 from flasgger import Swagger, swag_from
+import json
 
 auth = Blueprint("auth", __name__, url_prefix="/api/v1/auth")
 
@@ -79,14 +80,36 @@ def login():
 def me():
     user_id = get_jwt_identity()
     user = User.query.filter_by(id=user_id).first()
-    return info_user(user)
+
+    cars = []
+
+    for item in Car.query.filter_by(user_id=user_id).all():
+
+        disks = []
+
+        for disk in CarDisk.query.filter_by(car_id=item.id).all():
+            disks.append(disk.serialize())
+
+        cars.append(
+            {
+                "detail": item.serialize(),
+                "disk": disks
+            }
+        )
+
+    #return info_user(user)
+    return jsonify({
+        "user": {
+            "info": user.serialize(),
+            "cars": cars
+        }
+    }), HTTP_200_OK
 
 
 @auth.get("/token/refresh")
 def refresh_users_token():
     identity = get_jwt_identity()
     access = create_access_token(identity=identity)
-
     return jsonify({
         "access": access
     }), HTTP_200_OK
