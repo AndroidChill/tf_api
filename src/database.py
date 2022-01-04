@@ -23,8 +23,8 @@ class Car(db.Model):
     brand = db.Column(db.String(80))
     model = db.Column(db.String(80))
     year = db.Column(db.Integer)
-    series = db.Column(db.Integer)
     number = db.Column(db.Integer)
+    series = db.Column(db.String(80))
     region = db.Column(db.Integer)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     created_at = db.Column(db.DateTime, default=datetime.now())
@@ -32,6 +32,18 @@ class Car(db.Model):
 
     def __repr__(self) -> str:
         return 'Car>>> {self.number}'
+
+    def serialize(self):
+        return {
+            "brand": self.brand,
+            "model": self.model,
+            "year": self.year,
+            "number": self.number,
+            "series": self.series,
+            "region": self.region,
+            "created_at": self.created_at,
+            "updated_at": self.updated_at,
+        }
 
 
 class CarDisk(db.Model):
@@ -43,3 +55,11 @@ class CarDisk(db.Model):
 
     def __repr__(self) -> str:
         return "CarDisk>>> {self.radius}"
+
+    def serialize(self):
+        return {
+            "brand": self.brand,
+            "radius": self.radius,
+            "lifetime": self.lifetime,
+            "car_id": self.car_id
+        }

@@ -27,3 +27,30 @@ def info_user(user):
             }
         )
     ), HTTP_200_OK
+
+def created_car(car):
+    return jsonify(
+        handle_response(
+            {
+                "car": car.serialize()
+            }
+        ), HTTP_201_CREATED
+    )
+
+def created_tire(tire):
+    return jsonify(
+        handle_response(
+            {
+                "tire": tire.serialize()
+            }
+        ), HTTP_201_CREATED
+    )
+
+def updated_tire(tire):
+    return jsonify(
+        handle_response(
+            {
+                "tire": tire.serialize()
+            }
+        ), HTTP_200_OK
+    )

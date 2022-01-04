@@ -1,0 +1,41 @@
+Tire create
+---
+tags:
+  - Car
+parameters:
+  - in: header
+    name: Authorization
+    required: true  
+  - name: body
+    description: The body should contain the user Registration data
+    in: body
+    required: true
+    schema:
+      type: object
+      required:
+        - "brand"
+        - "radius"
+        - "lifetime"
+        - "car_id"
+      properties:
+        brand:
+          type: "string"
+          example: "BMW"
+        radius:
+          type: "string"
+          example: "16"
+        lifetime:
+          type: "string"
+          example: "1 year"
+        car_id:
+          type: "integer"
+          example: 3
+responses:
+  200:
+    description: car successfully updated
+    
+  201:
+    description: car successfully created
+
+  400:
+    description: car communication error

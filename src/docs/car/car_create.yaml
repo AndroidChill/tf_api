@@ -1,0 +1,50 @@
+Car create
+---
+tags:
+  - Car
+parameters:
+  - in: header
+    name: Authorization
+    required: true  
+  - name: body
+    description: The body should contain the user Registration data
+    in: body
+    required: true
+    schema:
+      type: object
+      required:
+        - "full_info"
+        - "brand"
+        - "model"
+        - "year"
+        - "series"
+        - "number"
+        - "region"
+      properties:
+        full_info:
+          type: "boolean"
+          example: true
+        brand:
+          type: "string"
+          example: "BMW"
+        model:
+          type: "string"
+          example: "8 G14/G15"
+        year:
+          type: "integer"
+          example: 2015
+        series:
+          type: "string"
+          example: "EKX"
+        number:
+          type: "integer"
+          example: 777
+        region:
+          type: "integer"
+          example: 116
+responses:
+  201:
+    description: car successfully created
+
+  400:
+    description: car communication error

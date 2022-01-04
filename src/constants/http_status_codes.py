@@ -83,8 +83,10 @@ def is_server_error():
 
 def handle_error(code, message):
     return {
-        "code": code,
-        "message": message
+        "error" : {
+            "code": code,
+            "message": message
+        }
     }
 
 def handle_response(response):
