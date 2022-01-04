@@ -17,7 +17,7 @@ def create_app(test_config=None):
     if test_config is None:
         app.config.from_mapping(
             SECRET_KEY=os.environ.get("SECRET_KEY"),
-            SQLALCHEMY_DATABASE_URI=os.environ.get("SQLALCHEMY_DB_URI"),
+            SQLALCHEMY_DATABASE_URI="sqlite:///tf_db.db",
             JWT_SECRET_KEY=os.environ.get('JWT_SECRET_KEY'),
             JWT_ACCESS_TOKEN_EXPIRES=36600,
             SQLALCHEMY_TRACK_MODIFICATIONS = False,
